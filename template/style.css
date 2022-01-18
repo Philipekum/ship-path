@@ -12,7 +12,7 @@ body, html{
 
 canvas{
     margin: 100px;
-    width: 724px;
-    height: 362px;
+    width: 1200px;
+    height: 1000px;
     background-color: rgb(137, 137, 243);
 }

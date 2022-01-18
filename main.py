@@ -21,5 +21,7 @@ def main():
 def map():
     return array_map()
 
+
+print(array_map())
 eel.init("template")
 eel.start("index.html")
