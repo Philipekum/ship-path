@@ -1,0 +1,18 @@
+body, html{
+    width: 100%;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    width: 100%;
+}
+
+canvas{
+    margin: 100px;
+    width: 724px;
+    height: 362px;
+    background-color: rgb(137, 137, 243);
+}

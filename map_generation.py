@@ -63,4 +63,4 @@ def array_map(filename='Data/map.txt'):
                 if map[i][j] == 1:
                     map[i][j] == None
 
-    return map
+    return map.tolist()

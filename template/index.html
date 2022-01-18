@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Map</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="shortcut icon" href="pic/ship.png" type="image/x-icon">
+  <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
+  <script src="eel.js"></script>
+</head>
+<body>
+  <button id='button'>click</button>
+  <canvas></canvas>
+</body>
+<script>
+
+  var ctx = document.querySelector('canvas').getContext('2d');
+  ctx.fillStyle = 'green';
+
+  async function showMap(){
+          let data = await eel.map()()
+          for(let y = 0; y < data.length; y++){
+            for(let x = 0; x < data[y].length; x++){
+              if (data[y][x] == 1){
+                  ctx.fillRect(x, y, 1, 1);
+              }
+          }
+      }
+  }
+
+  async function setNavigation(){
+    let path = await eel.main()()
+    ctx.moveTo(path[0][0], path[0][1])
+    for (i=1; i<path.length; i++){
+      ctx.lineTo(path[i][0], path[i][1])
+    }
+    ctx.lineWidth = 1
+    ctx.strokeStyle = "red"
+    ctx.stroke()
+  }
+
+  jQuery('#button').on('click', function(){
+    showMap()
+    setNavigation()
+  })
+
+</script>
+</html>
