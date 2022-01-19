@@ -49,19 +49,18 @@ $('.arrow').on('click', function(){
   })
 
   let point
-  let dep = document.querySelector('.from').options.selectedIndex;
-  let arr = document.querySelector('.to').options.selectedIndex;
+
 
   function ports(port){
     switch (port){
       case 0:
-        point = [80, 57]
+        point = [73, 64]
         break;
       case 1:
-        point = [170, 25]
+        point = [283, 78]
         break;
       case 2:
-        point = [280, 140]
+        point = [294, 148]
     }
     return point
   }
@@ -80,11 +79,13 @@ $('.arrow').on('click', function(){
           }
       }
   }
-  let start = ports(dep)
-  let end = ports(arr)
-  // let start = [0, 100]
-  // let end = [260, 100]
+  let count = 0
   async function setNavigation(){
+    if (count != 0){location.reload()}
+    let dep = document.querySelector('.from').options.selectedIndex;
+    let arr = document.querySelector('.to').options.selectedIndex;
+    let start = ports(dep)
+    let end = ports(arr)
     let path = await eel.path_finder(start, end)()
     ctx.moveTo(path[0][0], path[0][1])
     for (i=1; i<path.length; i++){
@@ -93,9 +94,9 @@ $('.arrow').on('click', function(){
     ctx.lineWidth = 1
     ctx.strokeStyle = "red"
     ctx.stroke()
+    count += 1
   }
   showMap()
-  setNavigation()
 
 
 </script>
