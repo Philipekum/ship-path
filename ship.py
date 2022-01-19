@@ -2,9 +2,13 @@ class Ship():
 
     def __init__(self, displacement, max_speed, min_speed):
         self.displacement = displacement
+        self.max_speed = max_speed
+        self.min_speed = min_speed
+
+    def fuel_consumption(self):
+        pass
 
 evergreen = Ship(200000, 23, 7)
-print(cargo_ship.displacement)
 
 # f1(t, w, n(v), Pcurr, Pwave, Pwind) = 0
 

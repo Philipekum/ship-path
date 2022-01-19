@@ -1,5 +1,4 @@
 from PIL import Image
-import numpy as np
 
 
 # Transforms image to txt-file of binary numbers and writes it
@@ -37,30 +36,3 @@ def text_file_map(filename='Data/map.jpg', resolution=360):
         f.write(ascii_image)
 
     return None
-
-
-# Transforms txt-map to np.array
-def array_map(filename='Data/map.txt'):
-
-    with open(filename, 'r') as f:
-        map = []
-
-        for line in f.readlines():
-            new_line = []
-
-            for chars in line:
-                if chars != '\n':
-                    chars = int(chars)
-                    new_line.append(chars)
-
-            map.append(new_line)
-
-        map = np.array(map, dtype=object)
-
-        # Change '1' to 'None' due to needs of path_finder
-        for i in range(len(map)):
-            for j in range(len(map[i])):
-                if map[i][j] == 1:
-                    map[i][j] == None
-
-    return map.tolist()

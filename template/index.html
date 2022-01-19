@@ -7,19 +7,71 @@
   <title>Navigation Map</title>
   <link rel="stylesheet" href="style.css">
   <link rel="shortcut icon" href="pic/ship.png" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
   <script src='https://code.jquery.com/jquery-3.6.0.min.js'></script>
   <script src="eel.js"></script>
 </head>
 <body>
-  <canvas height="180" width="360"></canvas>
+  <div class="container">
+    <div class="container-menu">
+      <img class='logo' src="pic/pic.png" alt="">
+      <div class="container-list">
+        <label>Выберите порты</label>
+        <div></div>
+        <select class='from'>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+        <select class='to'>
+          <option>A</option>
+          <option>B</option>
+          <option>C</option>
+        </select>
+      </div>
+      <button class='list-btn' onclick='setNavigation()'>Показать</button>
+    </div>
+    <img class='arrow' src="pic/arrow.png" alt="">
+    <canvas height="180" width="360"></canvas>
+  </div>
+
+
 </body>
 <script>
+
+$('.arrow').on('click', function(){
+    $('.container-menu').slideToggle(1000)
+    $('.arrow').css({
+      'transform':'rotate(90deg)'
+    })
+  })
+
+  let point
+  let dep = document.querySelector('.from').options.selectedIndex;
+  let arr = document.querySelector('.to').options.selectedIndex;
+
+  function ports(port){
+    switch (port){
+      case 0:
+        point = [80, 57]
+        break;
+      case 1:
+        point = [170, 25]
+        break;
+      case 2:
+        point = [280, 140]
+    }
+    return point
+  }
+
 
   var ctx = document.querySelector('canvas').getContext('2d');
   ctx.fillStyle = 'white';
 
   async function showMap(){
-          let data = await eel.map()()
+          let data = await eel.array_map()()
           for(let y = 1; y < data.length-1; y++){
             for(let x = 0; x < data[y].length; x++){
               if (data[y][x] == 1){
@@ -28,9 +80,12 @@
           }
       }
   }
-
+  let start = ports(dep)
+  let end = ports(arr)
+  // let start = [0, 100]
+  // let end = [260, 100]
   async function setNavigation(){
-    let path = await eel.main()()
+    let path = await eel.path_finder(start, end)()
     ctx.moveTo(path[0][0], path[0][1])
     for (i=1; i<path.length; i++){
       ctx.lineTo(path[i][0], path[i][1])
