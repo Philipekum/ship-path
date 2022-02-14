@@ -3,7 +3,7 @@ from PIL import Image
 
 # Transforms image to txt-file of binary numbers and writes it
 # Source code: https://dev.to/anuragrana/generating-ascii-art-from-colored-image-using-python-4ace
-def text_file_map(filename='Data/map.jpg', resolution=360):
+def text_file_map(filename: str = 'Data/map.jpg', resolution: int = 360) -> None:
 
     # pass the image as command line argument
     img = Image.open(filename)
