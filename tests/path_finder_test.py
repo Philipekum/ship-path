@@ -1,5 +1,4 @@
 import unittest
-import timeout_decorator
 from main import path_finder
 
 
@@ -16,7 +15,6 @@ class MyTestCase(unittest.TestCase):
     def test_all_int(self):
         self.assertRaises(TypeError, path_finder([0, 0], [1, 1]))
 
-    @timeout_decorator.timeout(1.5, timeout_exception=StopIteration)
     def test_time_exception(self):
         self.assertRaises(TypeError, path_finder([0, 0], [359, 178]))
 

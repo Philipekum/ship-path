@@ -12,7 +12,7 @@ def path_finder(start: list, end: list) -> list:
 
     # Input check
     if not isinstance(start, list) or not isinstance(end, list):
-        raise TypeError
+        raise ValueError
     if len(start) != 2 or len(end) != 2:
         raise ValueError
     if not all(isinstance(x, int) for x in start) or not all(isinstance(x, int) for x in end):
